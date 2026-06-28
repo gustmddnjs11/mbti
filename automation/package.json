@@ -1,0 +1,14 @@
+{
+  "name": "mbti-auto-poster",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "관점 토크 - 매일 MBTI 토론 카드 자동 생성 & 인스타 발행",
+  "scripts": {
+    "render": "node render.mjs",
+    "post": "node post.mjs"
+  },
+  "dependencies": {
+    "puppeteer": "^23.11.1"
+  }
+}

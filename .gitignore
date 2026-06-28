@@ -11,6 +11,10 @@ MBTI심화분석.md
 콘텐츠분석.md
 트렌드분석.md
 
+# 자동화 빌드 산출물
+automation/node_modules/
+automation/out/
+
 # OS/에디터
 Thumbs.db
 .DS_Store

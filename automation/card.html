@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>html,body{margin:0;padding:0}#cv{display:block}</style>
+</head>
+<body>
+<canvas id="cv" width="1080" height="1080"></canvas>
+<script>
+function iWrap(ctx,text,maxW){
+  var out=[],words=(text||'').split(' '),line='';
+  for(var i=0;i<words.length;i++){var w=words[i],t=line?line+' '+w:w;
+    if(ctx.measureText(t).width<=maxW){line=t;continue;}
+    if(line){out.push(line);line=w;}
+    while(ctx.measureText(line).width>maxW&&line.length>1){var c=line.length-1;while(c>1&&ctx.measureText(line.slice(0,c)).width>maxW)c--;out.push(line.slice(0,c));line=line.slice(c);}
+  }
+  if(line)out.push(line);return out;
+}
+function iRound(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function drawCard(t){
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),W=1080,H=1080;
+  var g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#FFF3EC');g.addColorStop(.55,'#FCEDF4');g.addColorStop(1,'#F3EEFF');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  ctx.fillStyle='#C24E7E';ctx.font='600 42px Jua, sans-serif';ctx.fillText('관점 토크',W/2,104);
+  ctx.fillStyle='#9A86A4';ctx.font='28px "Gowun Dodum", sans-serif';ctx.fillText('같은 상황, 다른 생각 · '+(t.cat||'관점 토론'),W/2,150);
+  ctx.fillStyle='#3A2E45';ctx.font='66px Jua, sans-serif';
+  var lines=iWrap(ctx,t.q,940).slice(0,4),lineH=86,cy=380,first=cy-(lines.length-1)*lineH/2;
+  lines.forEach(function(ln,i){ctx.fillText(ln,W/2,first+i*lineH);});
+  var cardW=452,cardH=300,cardY=560,lx=64,rx=W-64-cardW;
+  function card(x,fill,bord,emoji,lab,inkc){
+    ctx.fillStyle=fill;iRound(ctx,x,cardY,cardW,cardH,40);ctx.fill();ctx.lineWidth=4;ctx.strokeStyle=bord;ctx.stroke();
+    ctx.fillStyle='#3A2E45';ctx.font='120px sans-serif';ctx.fillText(emoji,x+cardW/2,cardY+150);
+    ctx.fillStyle=inkc;ctx.font='44px Jua, sans-serif';
+    var ll=iWrap(ctx,(lab||'').replace(/<br>/g,' '),cardW-56).slice(0,2);
+    ll.forEach(function(s,i){ctx.fillText(s,x+cardW/2,cardY+225+i*52);});
+  }
+  card(lx,'#FFE3D8','#FFD0BD',t.a.em,t.a.lab,'#C7593A');
+  card(rx,'#E4DEFF','#D0C5FF',t.b.em,t.b.lab,'#6A56C8');
+  ctx.beginPath();ctx.arc(W/2,cardY+cardH/2,58,0,7);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=4;ctx.strokeStyle='#F0E0E8';ctx.stroke();
+  ctx.fillStyle='#FF7AA6';ctx.font='44px Jua, sans-serif';ctx.fillText('VS',W/2,cardY+cardH/2+16);
+  ctx.fillStyle='#6B5A74';ctx.font='44px "Gowun Dodum", sans-serif';ctx.fillText('당신의 선택은? 댓글로 토론 🔥',W/2,952);
+  ctx.fillStyle='#C24E7E';ctx.font='40px Jua, sans-serif';ctx.fillText(t.handle||'@관점토크',W/2,1014);
+}
+</script>
+</body>
+</html>
