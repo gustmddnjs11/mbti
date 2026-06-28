@@ -36,24 +36,24 @@
   @keyframes popIn{0%{transform:scale(.4);opacity:0;}60%{transform:scale(1.12);}100%{transform:scale(1);opacity:1;}}
   @keyframes floatUp{from{transform:translateY(10px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 
-  #app{position:relative; z-index:1; width:100%; max-width:412px; min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; padding:0 22px 30px;}
+  #app{position:relative; z-index:1; width:100%; max-width:412px; min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; padding:0 20px 10px;}
   .float{animation:floatUp .5s ease both;}
   .center{flex:1; display:flex; flex-direction:column; justify-content:center;}
 
   /* home */
-  .applogo{width:80px;height:80px;margin:0 auto 22px;border-radius:26px;background:linear-gradient(145deg,#FF9E8A,#FF7AA6);
-           display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 12px 28px rgba(255,122,166,.38);}
-  h1{font-size:38px;margin:0;color:var(--ink);letter-spacing:-1px;line-height:1.25;text-align:center;}
-  .sub{text-align:center;font-size:15px;color:var(--ink2);line-height:1.65;margin:14px 0 0;}
-  .modecard{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:center;gap:18px;padding:22px;border-radius:28px;margin-bottom:16px;transition:transform .12s;}
+  .applogo{width:52px;height:52px;margin:0 auto 9px;border-radius:17px;background:linear-gradient(145deg,#FF9E8A,#FF7AA6);
+           display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 18px rgba(255,122,166,.32);}
+  h1{font-size:31px;margin:0;color:var(--ink);letter-spacing:-1px;line-height:1.2;text-align:center;}
+  .sub{text-align:center;font-size:13.5px;color:var(--ink2);line-height:1.5;margin:8px 0 0;}
+  .modecard{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:11px 15px;border-radius:18px;margin-bottom:8px;transition:transform .12s;}
   .modecard:active{transform:scale(.97);}
   .modecard.solo{background:linear-gradient(135deg,#FFF1EA,#FFE4DA);border:1.5px solid #FFD3C2;box-shadow:0 10px 24px rgba(255,138,107,.16);}
   .modecard.duo{background:linear-gradient(135deg,#F1ECFF,#E6E0FF);border:1.5px solid #D2C7FF;box-shadow:0 10px 24px rgba(147,133,240,.16);}
-  .modeic{width:58px;height:58px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:29px;flex-shrink:0;color:#fff;}
+  .modeic{width:46px;height:46px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;color:#fff;}
   .modecard.solo .modeic{background:var(--coral);box-shadow:0 8px 16px rgba(255,138,107,.35);}
   .modecard.duo .modeic{background:var(--lav);box-shadow:0 8px 16px rgba(147,133,240,.35);}
-  .modet{font-size:21px;} .modecard.solo .modet{color:var(--coralInk);} .modecard.duo .modet{color:var(--lavInk);}
-  .moded{font-size:12.5px;color:var(--ink2);margin-top:4px;}
+  .modet{font-size:18px;} .modecard.solo .modet{color:var(--coralInk);} .modecard.duo .modet{color:var(--lavInk);}
+  .moded{font-size:11.5px;color:var(--ink2);margin-top:2px;}
   .foot{text-align:center;font-size:12px;color:#C0AEC8;line-height:1.55;}
 
   /* topbar / progress */
@@ -228,11 +228,11 @@ function lockOpts(i){document.querySelectorAll('.optbtn').forEach((b,k)=>{b.oncl
 function home(){
   mode=null;
   app.innerHTML=`
-   <div class="float" style="padding:50px 0 20px;display:flex;flex-direction:column">
+   <div class="float" style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:14px 0">
      <div class="applogo">🔥</div>
      <h1 class="jua">논쟁의 민족</h1>
      <p class="sub">같은 상황, 다른 생각<br>MBTI로 시작하는 관점 토론</p>
-     <div style="margin-top:44px">
+     <div style="margin-top:20px">
        <button class="modecard solo" onclick="startSolo()">
          <div class="modeic">🧍</div><div><div class="modet jua">혼자 모드</div><div class="moded">카드에 답하며 내 성향 알아보기</div></div>
        </button>
@@ -249,7 +249,7 @@ function home(){
          <div class="modeic" style="background:#E1306C;box-shadow:0 8px 16px rgba(225,48,108,.32)">📸</div><div><div class="modet jua" style="color:#C13584">인스타 카드</div><div class="moded">토론 주제를 인스타 이미지로</div></div>
        </button>
      </div>
-     <p class="foot" style="margin-top:26px">정답은 없어요. 서로의 관점을 알아가는 시간 ✨</p>
+     <p class="foot" style="margin-top:14px">정답은 없어요. 서로의 관점을 알아가는 시간 ✨</p>
    </div>`;
 }
 
