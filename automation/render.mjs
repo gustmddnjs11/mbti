@@ -12,7 +12,7 @@ fs.mkdirSync(POSTS, { recursive: true });
 fs.mkdirSync(OUT, { recursive: true });
 
 const topics = JSON.parse(fs.readFileSync(path.join(__dirname, 'topics.json'), 'utf8'));
-const HANDLE = process.env.IG_HANDLE || '@관점토크';
+const HANDLE = process.env.IG_HANDLE || '@논쟁의민족';
 const N = topics.length;
 const day = Math.floor(Date.now() / 86400000);
 
@@ -56,7 +56,7 @@ fs.writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(manifest, null,
 console.log('📦 manifest:', manifest.map((m) => m.file).join(', '));
 
 function caption(t) {
-  const base = ['#MBTI', '#엠비티아이', '#mbti토론', '#성격유형', '#토론주제', '#관점토크', '#밸런스게임'];
+  const base = ['#MBTI', '#엠비티아이', '#mbti토론', '#성격유형', '#토론주제', '#논쟁의민족', '#밸런스게임'];
   const byTheme = {
     연애: ['#연애', '#연애토론', '#커플'],
     이별: ['#이별', '#이별후', '#연애'],

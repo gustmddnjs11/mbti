@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#FF8A6B">
-<title>같은 상황, 다른 생각 · 관점 토크</title>
+<title>논쟁의 민족 · 같은 상황, 다른 생각</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
@@ -227,9 +227,9 @@ function home(){
   mode=null;
   app.innerHTML=`
    <div class="float" style="padding:50px 0 20px;display:flex;flex-direction:column">
-     <div class="applogo">💬</div>
-     <h1 class="jua">같은 상황,<br>다른 생각</h1>
-     <p class="sub">MBTI로 시작하는 마음 대화<br>같은 질문, 서로 다른 답을 나눠봐요</p>
+     <div class="applogo">🔥</div>
+     <h1 class="jua">논쟁의 민족</h1>
+     <p class="sub">같은 상황, 다른 생각<br>MBTI로 시작하는 관점 토론</p>
      <div style="margin-top:44px">
        <button class="modecard solo" onclick="startSolo()">
          <div class="modeic">🧍</div><div><div class="modet jua">혼자 모드</div><div class="moded">카드에 답하며 내 성향 알아보기</div></div>
@@ -971,7 +971,7 @@ function goHomeClear(){clearHash();home();}
 function goChallengeFromRcv(){clearHash();setupChallenge();}
 
 /* ===== 인스타 카드 생성기 (토론 주제 → 1080×1080 이미지) ===== */
-let insta={q:'',a:{em:'',lab:''},b:{em:'',lab:''},cat:'',handle:'@관점토크'};
+let insta={q:'',a:{em:'',lab:''},b:{em:'',lab:''},cat:'',handle:'@논쟁의민족'};
 function esc(s){return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
 function instaPick(){
   const pool=allTopics(),it=pool[Math.floor(Math.random()*pool.length)];
@@ -1018,7 +1018,7 @@ function drawInstaCard(){
   const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#FFF3EC');g.addColorStop(.55,'#FCEDF4');g.addColorStop(1,'#F3EEFF');
   ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   ctx.textAlign='center';ctx.textBaseline='alphabetic';
-  ctx.fillStyle='#C24E7E';ctx.font='600 42px Jua, sans-serif';ctx.fillText('관점 토크', W/2, 104);
+  ctx.fillStyle='#C24E7E';ctx.font='600 42px Jua, sans-serif';ctx.fillText('논쟁의 민족', W/2, 104);
   ctx.fillStyle='#9A86A4';ctx.font='28px "Gowun Dodum", sans-serif';ctx.fillText('같은 상황, 다른 생각 · '+(insta.cat||'관점 토론'), W/2, 150);
   ctx.fillStyle='#3A2E45';ctx.font='66px Jua, sans-serif';
   const lines=iWrap(ctx,insta.q,940).slice(0,4),lineH=86,cy=380,first=cy-(lines.length-1)*lineH/2;
@@ -1035,7 +1035,7 @@ function drawInstaCard(){
   ctx.beginPath();ctx.arc(W/2,cardY+cardH/2,58,0,7);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=4;ctx.strokeStyle='#F0E0E8';ctx.stroke();
   ctx.fillStyle='#FF7AA6';ctx.font='44px Jua, sans-serif';ctx.fillText('VS',W/2,cardY+cardH/2+16);
   ctx.fillStyle='#6B5A74';ctx.font='44px "Gowun Dodum", sans-serif';ctx.fillText('당신의 선택은? 댓글로 토론 🔥',W/2,952);
-  ctx.fillStyle='#C24E7E';ctx.font='40px Jua, sans-serif';ctx.fillText(insta.handle||'@관점토크',W/2,1014);
+  ctx.fillStyle='#C24E7E';ctx.font='40px Jua, sans-serif';ctx.fillText(insta.handle||'@논쟁의민족',W/2,1014);
 }
 function saveInsta(){const cv=document.getElementById('icv');if(!cv)return;const a=document.createElement('a');a.download='관점토크_'+Date.now()+'.png';a.href=cv.toDataURL('image/png');a.click();toast('이미지 저장됐어요! 인스타에 올려보세요 📸');}
 

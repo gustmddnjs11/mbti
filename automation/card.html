@@ -25,7 +25,7 @@ function drawCard(t){
   var g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#FFF3EC');g.addColorStop(.55,'#FCEDF4');g.addColorStop(1,'#F3EEFF');
   ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   ctx.textAlign='center';ctx.textBaseline='alphabetic';
-  ctx.fillStyle='#C24E7E';ctx.font='600 42px Jua, sans-serif';ctx.fillText('관점 토크',W/2,104);
+  ctx.fillStyle='#C24E7E';ctx.font='600 42px Jua, sans-serif';ctx.fillText('논쟁의 민족',W/2,104);
   ctx.fillStyle='#9A86A4';ctx.font='28px "Gowun Dodum", sans-serif';ctx.fillText('같은 상황, 다른 생각 · '+(t.cat||'관점 토론'),W/2,150);
   ctx.fillStyle='#3A2E45';ctx.font='66px Jua, sans-serif';
   var lines=iWrap(ctx,t.q,940).slice(0,4),lineH=86,cy=380,first=cy-(lines.length-1)*lineH/2;
@@ -43,7 +43,7 @@ function drawCard(t){
   ctx.beginPath();ctx.arc(W/2,cardY+cardH/2,58,0,7);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=4;ctx.strokeStyle='#F0E0E8';ctx.stroke();
   ctx.fillStyle='#FF7AA6';ctx.font='44px Jua, sans-serif';ctx.fillText('VS',W/2,cardY+cardH/2+16);
   ctx.fillStyle='#6B5A74';ctx.font='44px "Gowun Dodum", sans-serif';ctx.fillText('당신의 선택은? 댓글로 토론 🔥',W/2,952);
-  ctx.fillStyle='#C24E7E';ctx.font='40px Jua, sans-serif';ctx.fillText(t.handle||'@관점토크',W/2,1014);
+  ctx.fillStyle='#C24E7E';ctx.font='40px Jua, sans-serif';ctx.fillText(t.handle||'@논쟁의민족',W/2,1014);
 }
 </script>
 </body>
