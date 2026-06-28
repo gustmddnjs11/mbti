@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
 <style>
   :root{
     --bg1:#FFF3EC; --bg2:#FCEDF4; --bg3:#F3EEFF;
@@ -1043,6 +1045,7 @@ function saveInsta(){const cv=document.getElementById('icv');if(!cv)return;const
 function axc(a){return {S:'#2BBE8A',N:'#9385F0',T:'#5BA8E8',F:'#FF7AA6',E:'#FF8A6B',I:'#7FD0CB',J:'#9385F0',P:'#FFC36B'}[a]||'#FF8A6B';}
 function typeTag(t){const m={E:'함께 충전형',I:'혼자 충전형',S:'현실·디테일형',N:'상상·가능성형',T:'논리·효율형',F:'마음·관계형',J:'계획형',P:'즉흥형'};return t.split('').map(c=>m[c]).join(' · ')+' 성향이에요 :)';}
 
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 checkIncoming();
 </script>
 </body>
