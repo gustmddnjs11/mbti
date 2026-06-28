@@ -12,7 +12,7 @@ fs.mkdirSync(POSTS, { recursive: true });
 fs.mkdirSync(OUT, { recursive: true });
 
 const topics = JSON.parse(fs.readFileSync(path.join(__dirname, 'topics.json'), 'utf8'));
-const HANDLE = process.env.IG_HANDLE || '@논쟁의민족';
+const HANDLE = process.env.IG_HANDLE || '@mbti_nonjaeng';
 const N = topics.length;
 const day = Math.floor(Date.now() / 86400000);
 

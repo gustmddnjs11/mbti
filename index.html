@@ -971,7 +971,7 @@ function goHomeClear(){clearHash();home();}
 function goChallengeFromRcv(){clearHash();setupChallenge();}
 
 /* ===== 인스타 카드 생성기 (토론 주제 → 1080×1080 이미지) ===== */
-let insta={q:'',a:{em:'',lab:''},b:{em:'',lab:''},cat:'',handle:'@논쟁의민족'};
+let insta={q:'',a:{em:'',lab:''},b:{em:'',lab:''},cat:'',handle:'@mbti_nonjaeng'};
 function esc(s){return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
 function instaPick(){
   const pool=allTopics(),it=pool[Math.floor(Math.random()*pool.length)];
@@ -1035,7 +1035,7 @@ function drawInstaCard(){
   ctx.beginPath();ctx.arc(W/2,cardY+cardH/2,58,0,7);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=4;ctx.strokeStyle='#F0E0E8';ctx.stroke();
   ctx.fillStyle='#FF7AA6';ctx.font='44px Jua, sans-serif';ctx.fillText('VS',W/2,cardY+cardH/2+16);
   ctx.fillStyle='#6B5A74';ctx.font='44px "Gowun Dodum", sans-serif';ctx.fillText('당신의 선택은? 댓글로 토론 🔥',W/2,952);
-  ctx.fillStyle='#C24E7E';ctx.font='40px Jua, sans-serif';ctx.fillText(insta.handle||'@논쟁의민족',W/2,1014);
+  ctx.fillStyle='#C24E7E';ctx.font='40px Jua, sans-serif';ctx.fillText(insta.handle||'@mbti_nonjaeng',W/2,1014);
 }
 function saveInsta(){const cv=document.getElementById('icv');if(!cv)return;const a=document.createElement('a');a.download='관점토크_'+Date.now()+'.png';a.href=cv.toDataURL('image/png');a.click();toast('이미지 저장됐어요! 인스타에 올려보세요 📸');}
 
