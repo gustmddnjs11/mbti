@@ -45,7 +45,17 @@ gh variable set IG_HANDLE -b "@관점토크"
 
 또는 터미널: `gh workflow run daily-post.yml`
 
+## (선택) 토큰 영구 자동 갱신 — GH_PAT 등록
+장기 토큰은 ~60일이면 만료돼요. 아래를 한 번 해두면 **매일 자동 갱신되어 영원히 안 만져도 됩니다.**
+1. GitHub → 우측 상단 프로필 → **Settings**(계정 설정) → 맨 아래 **Developer settings**
+2. **Personal access tokens → Fine-grained tokens → Generate new token**
+3. Repository access: **Only select repositories → `mbti`** 선택
+4. Permissions → Repository permissions → **Secrets: Read and write** 체크
+5. 생성된 토큰 복사 → 레포 **Settings → Secrets and variables → Actions** → New secret
+   - Name: `GH_PAT` / Secret: (복사한 토큰)
+- 안 해도 자동 포스팅은 됩니다. 다만 ~60일 뒤 토큰을 수동 재발급해야 해요.
+
 ## 참고 / 한계
 - 인스타 그래프 API는 하루 25개까지 발행 가능 (우리는 2개라 여유).
-- 장기 토큰은 약 60일마다 갱신 필요 (자동 갱신은 다음 단계에서 추가 가능).
+- 투표 댓글 작성은 `instagram_business_manage_comments` 권한이 필요할 수 있어요(없으면 발행은 되고 댓글만 건너뜀).
 - 캐러셀/스토리/릴스는 v1 미지원(단일 이미지 게시만). 필요 시 확장.

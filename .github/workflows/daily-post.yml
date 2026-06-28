@@ -52,3 +52,11 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: node post.mjs
+
+      - name: 토큰 자동 갱신
+        working-directory: automation
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GH_REPO: ${{ github.repository }}
+        run: node refresh.mjs

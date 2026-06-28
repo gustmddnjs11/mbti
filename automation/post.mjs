@@ -59,7 +59,15 @@ for (const m of manifest) {
   const publish = await postForm(`${API}/${IG_USER_ID}/media_publish`, {
     creation_id: create.json.id, access_token: TOKEN,
   });
-  if (publish.json.id) { posted++; console.log('✅ 발행 완료:', m.file, '→ media', publish.json.id); }
-  else console.error('❌ 발행 실패:', JSON.stringify(publish.json));
+  if (!publish.json.id) { console.error('❌ 발행 실패:', JSON.stringify(publish.json)); continue; }
+  posted++; console.log('✅ 발행 완료:', m.file, '→ media', publish.json.id);
+
+  // 첫 댓글로 투표 유도 (권한 없으면 무시)
+  if (m.a && m.b) {
+    const vote = `🗳️ 댓글 투표 ㄱㄱ!\nⒶ ${m.a}\nⒷ ${m.b}\n\n→ 댓글에 A 또는 B + 이유! 가장 많은 쪽이 오늘의 승자 🏆`;
+    const c = await postForm(`${API}/${publish.json.id}/comments`, { message: vote, access_token: TOKEN });
+    if (c.json.id) console.log('   💬 투표 댓글 작성 완료');
+    else console.log('   ⚠️ 투표 댓글 실패(권한 필요할 수 있음):', JSON.stringify(c.json));
+  }
 }
 console.log(`🎉 총 ${posted}/${manifest.length}개 발행`);
