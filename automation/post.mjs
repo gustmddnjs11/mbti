@@ -6,19 +6,29 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, 'out', 'manifest.json'), 'utf8'));
 
-const IG_USER_ID = process.env.IG_USER_ID;
+let IG_USER_ID = process.env.IG_USER_ID;
 const TOKEN = process.env.IG_ACCESS_TOKEN;
 const REPO = process.env.GH_REPO || 'gustmddnjs11/mbti';
 const BRANCH = process.env.GH_BRANCH || 'main';
-const API = 'https://graph.facebook.com/v21.0';
+// Instagram 로그인 방식(graph.instagram.com). IG_USER_ID는 토큰에서 자동 조회.
+const API = 'https://graph.instagram.com/v21.0';
 
-if (!IG_USER_ID || !TOKEN) {
-  console.log('⚠️  IG_USER_ID / IG_ACCESS_TOKEN 시크릿이 없어 발행을 건너뜁니다 (드라이런).');
+if (!TOKEN) {
+  console.log('⚠️  IG_ACCESS_TOKEN 시크릿이 없어 발행을 건너뜁니다 (드라이런).');
   console.log('    이미지는 posts/ 에 저장·커밋됐어요. 토큰을 추가하면 자동 발행됩니다.');
   process.exit(0);
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// 토큰만 있으면 계정 ID 자동 조회 (사용자가 ID를 직접 찾을 필요 없음)
+if (!IG_USER_ID) {
+  const r = await fetch(`${API}/me?fields=user_id,username&access_token=${TOKEN}`);
+  const j = await r.json().catch(() => ({}));
+  IG_USER_ID = j.user_id || j.id;
+  if (!IG_USER_ID) { console.error('❌ 토큰에서 계정 ID를 못 가져왔어요:', JSON.stringify(j)); process.exit(1); }
+  console.log('👤 인스타 계정:', j.username || '(이름미상)', '/ ID', IG_USER_ID);
+}
 
 async function postForm(url, params) {
   const r = await fetch(url, { method: 'POST', body: new URLSearchParams(params) });
