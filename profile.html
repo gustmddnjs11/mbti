@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<title>논쟁의 민족 · 프로필 사진</title>
+<style>
+  body{margin:0;font-family:'Gowun Dodum',sans-serif;background:linear-gradient(168deg,#FFF3EC,#FCEDF4 55%,#F3EEFF);color:#4A3A55;min-height:100vh;padding:24px 16px;}
+  .wrap{max-width:460px;margin:0 auto;text-align:center;}
+  h1{font-family:'Jua',sans-serif;font-size:26px;margin:6px 0 4px;}
+  .sub{color:#9A86A4;font-size:14px;margin-bottom:24px;}
+  .item{background:#fff;border-radius:24px;padding:22px;margin-bottom:20px;box-shadow:0 10px 28px rgba(120,90,140,.12);}
+  .lbl{font-family:'Jua',sans-serif;font-size:16px;color:#C24E7E;margin-bottom:14px;}
+  .pv{position:relative;width:240px;height:240px;margin:0 auto 16px;}
+  canvas{width:240px;height:240px;border-radius:50%;display:block;box-shadow:0 6px 18px rgba(0,0,0,.12);}
+  .ring{position:absolute;inset:-5px;border-radius:50%;border:3px solid #fff;pointer-events:none;box-shadow:0 0 0 2px #F0D9E6;}
+  .hint{font-size:12px;color:#B0A0B8;margin-bottom:14px;}
+  button{all:unset;cursor:pointer;display:block;width:100%;box-sizing:border-box;padding:15px;border-radius:16px;background:linear-gradient(135deg,#FF9E8A,#FF7AA6);color:#fff;font-family:'Jua',sans-serif;font-size:16px;text-align:center;transition:transform .12s;}
+  button:active{transform:scale(.97);}
+  .note{font-size:12.5px;color:#9A86A4;line-height:1.6;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="jua">논쟁의 민족 · 프로필 사진</h1>
+  <p class="sub">원형 미리보기 그대로 인스타에 올라가요</p>
+
+  <div class="item">
+    <div class="lbl">A. 소프트 (앱 감성)</div>
+    <div class="pv"><canvas id="a" width="1080" height="1080"></canvas><div class="ring"></div></div>
+    <div class="hint">파스텔 배경 + 🔥 — 부드럽고 따뜻한 느낌</div>
+    <button onclick="dl('a','논쟁의민족_프로필_소프트.png')">💾 A 다운로드</button>
+  </div>
+
+  <div class="item">
+    <div class="lbl">B. 볼드 (작아도 잘 보임)</div>
+    <div class="pv"><canvas id="b" width="1080" height="1080"></canvas><div class="ring"></div></div>
+    <div class="hint">진한 코랄 배경 + 흰 글씨 — 피드에서 눈에 확 띔 (추천)</div>
+    <button onclick="dl('b','논쟁의민족_프로필_볼드.png')">💾 B 다운로드</button>
+  </div>
+
+  <p class="note">다운로드한 이미지를 인스타 → 프로필 편집 → 사진 변경에서 올리면 끝!<br>원으로 잘려도 글씨가 안 잘리게 가운데로 맞춰뒀어요.</p>
+</div>
+
+<script>
+function draw(){
+  // A — 소프트
+  var a=document.getElementById('a').getContext('2d');
+  var g1=a.createLinearGradient(0,0,1080,1080);g1.addColorStop(0,'#FFE3D8');g1.addColorStop(.5,'#FCD9E8');g1.addColorStop(1,'#E4DEFF');
+  a.fillStyle=g1;a.fillRect(0,0,1080,1080);
+  a.textAlign='center';a.textBaseline='middle';
+  a.font='180px sans-serif';a.fillText('🔥',540,360);
+  a.fillStyle='#3A2E45';a.font='154px Jua, sans-serif';
+  a.fillText('논쟁의',540,595);a.fillText('민족',540,765);
+
+  // B — 볼드
+  var b=document.getElementById('b').getContext('2d');
+  var g2=b.createLinearGradient(0,0,1080,1080);g2.addColorStop(0,'#FF9E8A');g2.addColorStop(.5,'#FF7AA6');g2.addColorStop(1,'#9385F0');
+  b.fillStyle=g2;b.fillRect(0,0,1080,1080);
+  b.textAlign='center';b.textBaseline='middle';
+  b.font='150px sans-serif';b.fillText('🔥',540,360);
+  b.fillStyle='#ffffff';b.font='190px Jua, sans-serif';
+  b.fillText('논쟁의',540,615);b.fillText('민족',540,800);
+}
+function dl(id,name){var c=document.getElementById(id);var a=document.createElement('a');a.download=name;a.href=c.toDataURL('image/png');a.click();}
+draw();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+</script>
+</body>
+</html>
