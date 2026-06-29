@@ -3,6 +3,7 @@ import puppeteer from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { topCommunity } from './supa.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -56,6 +57,30 @@ for (const idx of picks) {
   await page.close();
   console.log('✅ rendered', file, '—', t.q);
 }
+// 커뮤니티 승인 인기글 1개 추가 발행
+try {
+  const top = await topCommunity();
+  if (top) {
+    pos++;
+    const palette = (day + pos) % 5;
+    const t = { q: top.q, a: { em: top.a_em, lab: top.a_lab }, b: { em: top.b_em, lab: top.b_lab }, cat: '🔥 커뮤니티 인기글', theme: '커뮤니티' };
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1080, height: 1080, deviceScaleFactor: 1 });
+    await page.setContent(html, { waitUntil: 'networkidle0' });
+    await page.evaluate(async () => { await document.fonts.ready; });
+    const dataUrl = await page.evaluate((topic) => { drawCard(topic); return document.getElementById('cv').toDataURL('image/png'); }, { ...t, handle: HANDLE, palette });
+    const file = `${stamp}-c.png`;
+    fs.writeFileSync(path.join(POSTS, file), Buffer.from(dataUrl.split(',')[1], 'base64'));
+    manifest.push({ file, caption: commCaption(top), a: top.a_lab, b: top.b_lab, subId: top.id });
+    await page.close();
+    console.log('✅ community pick', file, '—', top.q);
+  } else {
+    console.log('ℹ️ 승인된 커뮤니티 인기글 없음 (스킵)');
+  }
+} catch (e) {
+  console.log('커뮤니티 픽 건너뜀:', e.message);
+}
+
 await browser.close();
 fs.writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(manifest, null, 2));
 console.log('📦 manifest:', manifest.map((m) => m.file).join(', '));
@@ -83,9 +108,15 @@ function caption(t, i) {
     만약에: ['#만약에', '#가정', '#상상'],
     가치관: ['#가치관', '#일상논쟁'],
     일상: ['#일상', '#mbti일상'],
+    커뮤니티: ['#커뮤니티', '#논쟁의민족', '#밸런스게임'],
   };
   const tags = base.concat(byTheme[t.theme] || []);
   const op = openers[i % openers.length];
   const tl = tails[i % tails.length];
   return `${t.q}\n\nⒶ ${t.a.lab.replace(/<br>/g, ' ')}\nⒷ ${t.b.lab.replace(/<br>/g, ' ')}\n\n${op}\n${tl}\n.\n.\n${tags.join(' ')}`;
+}
+
+function commCaption(top) {
+  const c = caption({ q: top.q, a: { lab: top.a_lab }, b: { lab: top.b_lab }, theme: '커뮤니티' }, day);
+  return `📢 커뮤니티 인기글! (by ${top.nick || '익명'})\n\n` + c;
 }

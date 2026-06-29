@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { markPosted } from './supa.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, 'out', 'manifest.json'), 'utf8'));
@@ -68,6 +69,12 @@ for (const m of manifest) {
     const c = await postForm(`${API}/${publish.json.id}/comments`, { message: vote, access_token: TOKEN });
     if (c.json.id) console.log('   💬 투표 댓글 작성 완료');
     else console.log('   ⚠️ 투표 댓글 실패(권한 필요할 수 있음):', JSON.stringify(c.json));
+  }
+
+  // 커뮤니티 글이면 발행 완료 표시(중복 방지)
+  if (m.subId) {
+    try { await markPosted(m.subId); console.log('   ✅ 커뮤니티 글 발행완료 표시(id', m.subId, ')'); }
+    catch (e) { console.log('   ⚠️ posted 표시 실패:', e.message); }
   }
 }
 console.log(`🎉 총 ${posted}/${manifest.length}개 발행`);

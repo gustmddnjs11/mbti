@@ -53,3 +53,10 @@ returns void language sql security definer set search_path = public as $$
   update submissions set reports = reports + 1 where id = sid;
 $$;
 grant execute on function report(bigint) to anon;
+
+-- 5) (인기글 자동 인스타용) 발행 완료 표시 함수
+create or replace function mark_posted(sid bigint)
+returns void language sql security definer set search_path = public as $$
+  update submissions set posted_at = now() where id = sid;
+$$;
+grant execute on function mark_posted(bigint) to anon;
