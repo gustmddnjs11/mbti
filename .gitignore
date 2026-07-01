@@ -2,6 +2,7 @@
 .claude/
 .mcp.json
 .agents/
+.stitch/
 
 # 내부 기획·분석 문서 (비공개 유지)
 기획서.md
@@ -12,6 +13,10 @@ MBTI심화분석.md
 알고리즘분석.md
 콘텐츠분석.md
 트렌드분석.md
+글로벌시장분석.md
+
+# 툴 lock
+skills-lock.json
 
 # 자동화 빌드 산출물
 automation/node_modules/
