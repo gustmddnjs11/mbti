@@ -170,11 +170,16 @@
   .chip{font-size:13px;padding:7px 13px;border-radius:999px;}
   .chip.same{background:#E3F7EE;color:#2BBE8A;}
   .chip.diff{background:#FFE7F0;color:var(--pink);}
+  /* 하단 중앙 플로팅 홈 버튼 (엄지 최적존) */
+  #homefab{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;display:none;align-items:center;gap:7px;padding:12px 22px;border:none;border-radius:999px;cursor:pointer;font-family:'Pretendard',sans-serif;font-weight:700;font-size:15px;color:#fff;background:linear-gradient(135deg,#FF9E8A,#FF7AA6);box-shadow:0 12px 28px -6px rgba(255,122,166,.55);transition:transform .12s;-webkit-tap-highlight-color:transparent;}
+  #homefab:active{transform:translateX(-50%) scale(.94);}
+  #homefab .material-symbols-outlined{font-size:20px;line-height:1;}
 </style>
 </head>
 <body>
 <div class="blob a"></div><div class="blob b"></div>
 <div id="app"></div>
+<button id="homefab" onclick="home()" aria-label="홈으로"><span class="material-symbols-outlined">home</span><span>홈</span></button>
 
 <script>
 /* ===== 데이터 ===== */
@@ -1138,6 +1143,8 @@ function axc(a){return {S:'#2BBE8A',N:'#9385F0',T:'#5BA8E8',F:'#FF7AA6',E:'#FF8A
 function typeTag(t){const m={E:'함께 충전형',I:'혼자 충전형',S:'현실·디테일형',N:'상상·가능성형',T:'논리·효율형',F:'마음·관계형',J:'계획형',P:'즉흥형'};return t.split('').map(c=>m[c]).join(' · ')+' 성향이에요 :)';}
 
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+// 홈 화면(.home2)이면 홈버튼 숨김, 그 외 화면이면 표시 (자동 토글)
+(function(){var fab=document.getElementById('homefab');function upd(){if(fab)fab.style.display=document.querySelector('.home2')?'none':'flex';}new MutationObserver(upd).observe(app,{childList:true});upd();})();
 checkIncoming();
 </script>
 </body>
